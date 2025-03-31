@@ -1,29 +1,27 @@
-	#include <Wire.h> // Подключаем библиотеку Wire для работы с I2C		
-  void setup() {	    
-    Serial.begin(115200); // Инициализируем последовательное соединение со скоростью 115200 бод	    
-    Wire.begin(); // Инициализируем I2C-соединение	    
-    Serial.println("Поиск I2C-устройств..."); // Выводим сообщение о начале поиска I2C-устройств	}
-	
-	void loop() {
-	    byte error, address; // Объявляем переменные для хранения ошибки и адреса
-	    int devices = 0; // Счетчик найденных устройств
-	
-	    // Проходим по всем возможным адресам I2C (от 1 до 126)
-	    for (address = 1; address < 127; address++) {
-	        Wire.beginTransmission(address); // Начинаем передачу на текущий адрес
-	        error = Wire.endTransmission(); // Завершаем передачу и получаем код ошибки
-	
-	        // Если ошибки нет (error == 0), значит устройство найдено
-	        if (error == 0) {
-	            Serial.print("Найдено устройство на 0x"); // Выводим сообщение о найденном устройстве
-	            Serial.println(address, HEX); // Выводим адрес устройства в шестнадцатеричном формате
-	            devices++; // Увеличиваем счетчик найденных устройств
-	        }
-	    }
-	
-	    // Если не найдено ни одного устройства, выводим соответствующее сообщение
-	    if (devices == 0) Serial.println("Устройства не найдены!");
-	
-	    delay(5000); // Ждем 5 секунд перед повторным сканированием
-	}
-	
+#include <Wire.h>  
+
+void setup() {    
+    Serial.begin(115200);    
+    Wire.begin();    
+    Serial.println("Поиск I2C-устройств...");  
+}  
+
+void loop() {
+    byte error, address;  
+    int devices = 0;  
+
+    for (address = 1; address < 127; address++) {
+        Wire.beginTransmission(address);  
+        error = Wire.endTransmission();  
+
+        if (error == 0) {
+            Serial.print("Найдено устройство на 0x");  
+            Serial.println(address, HEX);  
+            devices++;  
+        }
+    }
+
+    if (devices == 0) Serial.println("Устройства не найдены!");  
+
+    delay(5000);  
+}
