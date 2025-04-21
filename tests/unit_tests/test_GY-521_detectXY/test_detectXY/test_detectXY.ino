@@ -18,7 +18,7 @@ void setup() {
   Wire.write(0x1C); // Регистр конфигурации акселерометра
   Wire.write(0x00); // Диапазон ±2g (16384 LSB/g)
   Wire.endTransmission(true);
-  
+  a
   Serial.println("MPU-6050 инициализирован");
 }
 
